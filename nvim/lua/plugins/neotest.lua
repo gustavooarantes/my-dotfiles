@@ -1,45 +1,66 @@
--- neotest.lua
----@diagnostic disable: missing-fields
 return {
   "nvim-neotest/neotest",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
-    { "rcasia/neotest-java", branch = "main" },
+    "antoinemadec/FixCursorHold.nvim",
     "nvim-neotest/neotest-python",
     "nvim-neotest/neotest-go",
-    "nvim-neotest/neotest-plenary",
+    "Issafalcon/neotest-dotnet",
+  },
+  keys = {
+    {
+      "<leader>tt",
+      function()
+        require("neotest").run.run()
+      end,
+      desc = "Run Nearest Test",
+    },
+    {
+      "<leader>tf",
+      function()
+        require("neotest").run.run(vim.fn.expand("%"))
+      end,
+      desc = "Run File",
+    },
+    {
+      "<leader>to",
+      function()
+        require("neotest").output.open({ enter = true })
+      end,
+      desc = "Test Output",
+    },
+    {
+      "<leader>ts",
+      function()
+        require("neotest").summary.toggle()
+      end,
+      desc = "Test Summary",
+    },
   },
   config = function()
-    local neotest = require("neotest")
-
-    neotest.setup({
+    ---@diagnostic disable: missing-fields
+    require("neotest").setup({
       adapters = {
-        -- Java:
-        require("neotest-java")({
-          command = vim.fn.filereadable("gradlew") == 1 and "./gradlew" or "./mvnw",
-          args = { "test" },
+        require("neotest-dotnet")({
+          dap = { args = { justMyCode = false } },
         }),
-        -- Python
         require("neotest-python")({
-          runner = "pytest",
           dap = { justMyCode = false },
+          runner = "pytest",
         }),
-        -- Go
         require("neotest-go")({
           experimental = { test_table = true },
         }),
-        -- Rust:
-        require("neotest-plenary")({
-          command = "cargo",
-          args = { "test" },
-        }),
-        -- C/C++:
-        require("neotest-plenary")({
-          command = "make",
-          args = { "test" },
-        }),
       },
+      output = { open_on_run = true },
+      icons = {
+        passed = " ",
+        running = " ",
+        failed = " ",
+        unknown = " ",
+      },
+      status = { virtual_text = true },
       quickfix = { enabled = true, open = false },
     })
   end,

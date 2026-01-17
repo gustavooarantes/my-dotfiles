@@ -5,38 +5,31 @@
 -- Better colors
 vim.opt.termguicolors = true
 
--- Disable swaps and other useless stuff nowadays
+-- Disable swaps
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.writebackup = false
 
--- Disable the mouse while in nvim
+-- Disable mouse
 vim.opt.mouse = ""
 
--- Line Numbers
+-- Line numbers
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.numberwidth = 4
 
--- TAB / INDENT CONFIG
+-- Use real tabs
 vim.opt.expandtab = false
-vim.opt.tabstop = 4 -- 1 tab = 4 spaces visually
-vim.opt.shiftwidth = 4 -- auto-indent = 4
-vim.opt.softtabstop = 4 -- Tab on insert = 4
-vim.opt.shiftround = true -- automatically rounds indent
-vim.opt.autoindent = true -- inherits from above line
-vim.opt.smartindent = true -- smart indent
 
 -- Split Windows
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- SCROLLING
-vim.opt.scrolloff = 10 -- 10 always visible lines above/below the cursor
+vim.opt.scrolloff = 10
 
 -- Cursor Line
 vim.opt.cursorline = true
-vim.opt.colorcolumn = "80"
 vim.opt.guicursor = table.concat({
   "n-v-c:block",
   "i-ci:block-blinkwait175-blinkon150-blinkoff175",
@@ -48,9 +41,9 @@ vim.opt.guicursor = table.concat({
 -- Folding
 vim.opt.foldlevel = 20
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- Utilize Treesitter folds
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
--- Better searching
+-- For Searching
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.incsearch = true
@@ -60,6 +53,3 @@ vim.opt.signcolumn = "yes"
 
 -- Faster updates for LSP, CursorHold, etc.
 vim.opt.updatetime = 300
-
--- Highlight matching brackets instantly
-vim.opt.showmatch = true

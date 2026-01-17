@@ -1,39 +1,43 @@
 return {
   "stevearc/conform.nvim",
+  event = { "BufWritePre" },
+  cmd = { "ConformInfo" },
   opts = {
-    formatters = {
-      my_clang_format = {
-        command = "clang-format",
-        args = {
-          "--style={BasedOnStyle: LLVM, UseTab: Always, IndentWidth: 4, TabWidth: 4, BreakBeforeBraces: Attach, AllowShortLoopsOnASingleLine: false, AllowShortIfStatementsOnASingleLine: false, AllowShortFunctionsOnASingleLine: None}",
-        },
-      },
-
-      my_ruff = {
-        command = "ruff",
-        args = { "format", "--line-length", "88", "--quiet" },
-      },
-
-      my_shfmt = {
-        command = "shfmt",
-        args = { "-i", "2" },
-      },
-    },
-
     formatters_by_ft = {
-      go = { "gofumpt", "goimports" },
-      dockerfile = { "dockerls" },
+      -- C# / .NET
+      cs = { "csharpier" },
+      -- Go
+      go = { "goimports", "gofumpt" },
+      -- Rust
+      rust = { "rustfmt", lsp_format = "fallback" },
+      -- C/C++
+      c = { "clang-format" },
+      cpp = { "clang-format" },
+      -- Java
+      java = { "google-java-format" },
+      -- Python
+      python = { "ruff_format" },
+      -- Web & Configs
+      javascript = { "prettierd", "prettier", stop_after_first = true },
+      typescript = { "prettierd", "prettier", stop_after_first = true },
+      javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+      typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+      css = { "prettierd", "prettier", stop_after_first = true },
+      html = { "prettierd", "prettier", stop_after_first = true },
+      json = { "prettierd", "prettier", stop_after_first = true },
+      yaml = { "prettierd", "prettier", stop_after_first = true },
+      markdown = { "prettierd", "prettier", stop_after_first = true },
       toml = { "taplo" },
-
-      python = { "my_ruff" },
-      sh = { "my_shfmt" },
-      bash = { "my_shfmt" },
-      zsh = { "my_shfmt" },
-
-      c = { "my_clang_format" },
-      cpp = { "my_clang_format" },
-
+      -- Lua
       lua = { "stylua" },
+      -- Shell Script
+      sh = { "shfmt" },
+      -- Fallback
+      ["_"] = { "trim_whitespace" },
     },
+
+    -- NOTIFICATIONS
+    notify_on_error = true,
+    notify_no_formatters = true,
   },
 }
