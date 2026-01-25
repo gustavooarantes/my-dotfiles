@@ -27,9 +27,7 @@ return {
     ensure_installed = {
       "c_sharp",
       "java",
-      "docker",
       "sql",
-      "k8s",
       "go",
       "bash",
       "asm",
@@ -47,6 +45,7 @@ return {
       "markdown_inline",
       "printf",
       "python",
+      "r",
       "query",
       "regex",
       "toml",
