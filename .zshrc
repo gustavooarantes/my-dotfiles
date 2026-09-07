@@ -17,3 +17,5 @@ command -v direnv >/dev/null 2>&1 && eval "$(direnv hook bash)"
 unalias gf 2>/dev/null
 
 alias get_idf='. $HOME/esp/esp-idf/export.sh'
+
+alias noise='ffplay -f lavfi "anoisesrc=c=pink:r=48000"'
